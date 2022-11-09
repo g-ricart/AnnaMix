@@ -1,0 +1,51 @@
+\hypertarget{classAnnaMix_1_1__AnnaOrderedDict}{}\doxysection{Anna\+Mix.\+\_\+\+Anna\+Ordered\+Dict Class Reference}
+\label{classAnnaMix_1_1__AnnaOrderedDict}\index{AnnaMix.\_AnnaOrderedDict@{AnnaMix.\_AnnaOrderedDict}}
+
+
+Inheritance diagram for Anna\+Mix.\+\_\+\+Anna\+Ordered\+Dict\+:
+% FIG 0
+
+
+Collaboration diagram for Anna\+Mix.\+\_\+\+Anna\+Ordered\+Dict\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classAnnaMix_1_1__AnnaOrderedDict_a6b4a33e8e8597958123ee8a9b88ec0dc}{prepend}} (self, key, value, dict\+\_\+setitem=dict.\+\_\+\+\_\+setitem\+\_\+\+\_\+)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}An OrderedDict with a prepend method.
+
+Methods
+-------
+prepend(key, value)
+    Append given key with given value to the left of the dictionnary.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classAnnaMix_1_1__AnnaOrderedDict_a6b4a33e8e8597958123ee8a9b88ec0dc}\label{classAnnaMix_1_1__AnnaOrderedDict_a6b4a33e8e8597958123ee8a9b88ec0dc}} 
+\index{AnnaMix.\_AnnaOrderedDict@{AnnaMix.\_AnnaOrderedDict}!prepend@{prepend}}
+\index{prepend@{prepend}!AnnaMix.\_AnnaOrderedDict@{AnnaMix.\_AnnaOrderedDict}}
+\doxysubsubsection{\texorpdfstring{prepend()}{prepend()}}
+{\footnotesize\ttfamily def Anna\+Mix.\+\_\+\+Anna\+Ordered\+Dict.\+prepend (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key,  }\item[{}]{value,  }\item[{}]{dict\+\_\+setitem = {\ttfamily dict.\+\_\+\+\_\+setitem\+\_\+\+\_\+} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Append given key with given value to the left of the dictionnary.
+
+If given key is already a key of the dictionnary, it is moved to the
+left, and it's value is not updated.
+
+Parameters
+----------
+key
+    New key to add to the left of the dictionnary.
+value
+    Value associated with the new key.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Anna\+Mix.\+py\end{DoxyCompactItemize}

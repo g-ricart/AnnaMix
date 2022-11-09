@@ -1,0 +1,134 @@
+\hypertarget{classAnnaMix_1_1AnnaMixEvent}{}\doxysection{Anna\+Mix.\+Anna\+Mix\+Event Class Reference}
+\label{classAnnaMix_1_1AnnaMixEvent}\index{AnnaMix.AnnaMixEvent@{AnnaMix.AnnaMixEvent}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classAnnaMix_1_1AnnaMixEvent_ad06e030920873a6863af9f10977108b9}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, train\+\_\+length, tree, outfile\+\_\+path)
+\item 
+def \mbox{\hyperlink{classAnnaMix_1_1AnnaMixEvent_ac02f1368f2f9a9a03dfbf8949921ca2a}{add\+Mix\+Combination}} (self, mixed\+\_\+cdt\+\_\+name, stems)
+\item 
+def \mbox{\hyperlink{classAnnaMix_1_1AnnaMixEvent_adcc939e0d1922ebf7b44d9d239082dfa}{run\+Mixing}} (self, progress=False, verbose=False)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class to perform candidate mixing on invariant mass, pT and rapidity.
+
+Mixing is done by ordering given TTree by runNumber and eventNumber, mixing
+daughter particles from a dynamic pool of events of size 'train_length'.
+
+Typical use:
+    >>> import ROOT
+    >>> import AnnaMix
+    >>> raw_tree = ROOT.TTree(...) # TTree containing data to be mixed.
+    >>> mix = AnnaMix.AnnaMixEvent(train_length = 50,
+                                   tree         = raw_tree,
+                                   outfile_path = "output.root")
+    >>> mix.addMixCombination("J_psi_1S", ["muplus", "muminus"])
+    >>> mix.runMixing()
+
+The example above will create a "output.root" file containing a TNtuple
+with the following branches :
+J_psi_1S_M, J_psi_1S_PT, J_psi_1S_Y, muplus_M, muplus_PT, muplus_Y,
+muminus_M, muminus_PY, muminus_Y.
+
+Here, the given TTree must contain the following branches :
+runNumber, eventNumber, muplus_PX, muplus_PY, muplus_PZ, muplus_PZ,
+muplus_PE, muplus_M, muplus_PT, muplus_Y, muminus_PX, muminus_PY,
+muminus_PZ, muminus_PZ, muminus_PE, muminus_M, muminus_PT, muminus_Y.
+
+A progress indicator can be displayed:
+>>> mix.runMixing(progress = True)
+Processing entry 4583/78596 (6%)
+
+A verbose mode is available:
+>>> mix.runMixing(verbose = True)
+This mode displays every particles being currently mixed with their index
+in the given TTree, as well as their run and event number.
+
+Methods
+-------
+addMixCombination(mixed_cdt_name, stems)
+    Add a combination of branches to be mixed.
+runMixing(progress=False, verbose=False)
+    Method used to run mixing.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classAnnaMix_1_1AnnaMixEvent_ad06e030920873a6863af9f10977108b9}\label{classAnnaMix_1_1AnnaMixEvent_ad06e030920873a6863af9f10977108b9}} 
+\index{AnnaMix.AnnaMixEvent@{AnnaMix.AnnaMixEvent}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!AnnaMix.AnnaMixEvent@{AnnaMix.AnnaMixEvent}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Anna\+Mix.\+Anna\+Mix\+Event.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{train\+\_\+length,  }\item[{}]{tree,  }\item[{}]{outfile\+\_\+path }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Construct all the necessary attributes for the object 'AnnaMixEvent'.
+
+Parameters
+----------
+train_length : int
+    Number of events used for mixing.
+tree : instance of ROOT.TTree
+    TTree to be mixed. Must have 'runNumber' and 'eventNumber'
+    as branches.
+outfile_path : str
+    Path for the .root file to be saved to.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classAnnaMix_1_1AnnaMixEvent_ac02f1368f2f9a9a03dfbf8949921ca2a}\label{classAnnaMix_1_1AnnaMixEvent_ac02f1368f2f9a9a03dfbf8949921ca2a}} 
+\index{AnnaMix.AnnaMixEvent@{AnnaMix.AnnaMixEvent}!addMixCombination@{addMixCombination}}
+\index{addMixCombination@{addMixCombination}!AnnaMix.AnnaMixEvent@{AnnaMix.AnnaMixEvent}}
+\doxysubsubsection{\texorpdfstring{addMixCombination()}{addMixCombination()}}
+{\footnotesize\ttfamily def Anna\+Mix.\+Anna\+Mix\+Event.\+add\+Mix\+Combination (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{mixed\+\_\+cdt\+\_\+name,  }\item[{}]{stems }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Add a combination of branches to be mixed.
+
+A stem is the name of one of the particles used for mixing. If one want
+to mix a dimuon pair to form J/psi, it is likely that the given TTree
+contains the branches muplus_M, muplus_PZ, ... and muminus_M,
+muminus_PZ, ...
+In this case, the given stems must be ["muplus", "muminus"].
+
+Branches of the output TNtuple will be named accordingly to the given
+mixed candidate name and stems: <mixed_cdt_name>_<variable>
+and <stem>_<variable>, where <variable> can be Y, PT, M.
+
+Parameters
+----------
+mixed_cdt_name : str
+    Name of mixed candidate.
+stems : List[str]
+    List of stems.
+
+Warns
+-----
+UserWarning
+    If one of the necessary branches for mixing is missing.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classAnnaMix_1_1AnnaMixEvent_adcc939e0d1922ebf7b44d9d239082dfa}\label{classAnnaMix_1_1AnnaMixEvent_adcc939e0d1922ebf7b44d9d239082dfa}} 
+\index{AnnaMix.AnnaMixEvent@{AnnaMix.AnnaMixEvent}!runMixing@{runMixing}}
+\index{runMixing@{runMixing}!AnnaMix.AnnaMixEvent@{AnnaMix.AnnaMixEvent}}
+\doxysubsubsection{\texorpdfstring{runMixing()}{runMixing()}}
+{\footnotesize\ttfamily def Anna\+Mix.\+Anna\+Mix\+Event.\+run\+Mixing (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{progress = {\ttfamily False},  }\item[{}]{verbose = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Method used to run mixing.
+
+Parameters
+----------
+progress : bool
+    Display a progress indicator.
+    Minimal performance impact.
+    Default is False.
+verbose : bool
+    Display runNumber, eventNumber and index in the given TTree of
+    every particles being mixed, as well as the weight value.
+    HUGE perfomance impact.
+    Default is False.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Anna\+Mix.\+py\end{DoxyCompactItemize}
